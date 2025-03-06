@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -98,13 +99,19 @@ fun HeroInformation(
 
 @Composable
 fun HeroApp(){
-    LazyColumn () {
-        items(HeroesRepository.heroes){
-            SuperheroItem(
-                superhero = it,
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = dimensionResource(R.dimen.padding_small))
-            )
+    Scaffold (
+        topBar = {
+            HeroTopAppBar()
+        }
+    ){ it ->
+        LazyColumn (contentPadding = it) {
+            items(HeroesRepository.heroes){
+                SuperheroItem(
+                    superhero = it,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp, vertical = dimensionResource(R.dimen.padding_small))
+                )
+            }
         }
     }
 }
